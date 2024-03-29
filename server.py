@@ -1,11 +1,17 @@
 from flask import Flask, render_template, request, jsonify
 import joblib
+import mlflow
 
 # Initialize Flask app
 app = Flask(__name__, template_folder="templates")
 
 # Load the pickled model
-model = joblib.load("model/boston_model.pkl")  # Replace "boston_house_price_prediction_model.pkl" with your model file
+model = joblib.load("model/random_forest_model.pkl")  # Replace "boston_house_price_prediction_model.pkl" with your model file
+
+
+#Initialize model tracking
+mlflow.set_tracking_uri("http://localhost:5002")  # Update the URI with your MLflow tracking server URI
+mlflow.start_run()
 
 # Define route for rendering the form
 @app.route("/", methods=["GET", "POST"])

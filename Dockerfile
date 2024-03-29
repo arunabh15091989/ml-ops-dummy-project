@@ -14,8 +14,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 5000
 
 # Define environment variables
-ENV FLASK_APP=your_script_name.py
+ENV FLASK_APP=server.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
-# Run the Flask application
-CMD ["flask", "run"]
+# Startup script to run Flask and MLflow
+CMD ["bash", "-c", "flask run --host 0.0.0.0 & mlflow ui --host 0.0.0.0 --port 5002"]
